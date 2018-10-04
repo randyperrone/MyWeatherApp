@@ -2,11 +2,11 @@ ABOUT:
 - Android application that displays the weather of a location based on either city, zipcode, or current location. Uses maps to show location of weather.
 
 INSTALLING: 
-- You will need to get an api key for "Maps SDK for Android" and enter that key into res/values/string/google_location_key field. Example: API KEY HERE 
-- You will need an api key for OpenWeatherMaps and enter that key into res/values/string/open_weather_key field. Example: API KEY HERE
+- You will need to get an api key for "Maps SDK for Android" and enter that key into res/values/string/google_location_key field. https://developers.google.com/maps/documentation/android-sdk/intro 
+- You will need an api key for OpenWeatherMaps and enter that key into res/values/string/open_weather_key field. https://openweathermap.org/appid 
 
 API's:
-- OpenWeatherMap JSON API for the weather information. 
+- OpenWeatherMap JSON API for the weather information. https://openweathermap.org/api 
 - Volley API for the REST calls. 
 - Google Maps API for the maps. 
 - Google Location API for the location services.
