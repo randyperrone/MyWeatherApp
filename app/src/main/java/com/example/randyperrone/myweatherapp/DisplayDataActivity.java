@@ -1,27 +1,12 @@
 package com.example.randyperrone.myweatherapp;
 
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.randyperrone.myweatherapp.Model.Consts;
 import com.example.randyperrone.myweatherapp.Model.DownloadWeatherData;
-import com.example.randyperrone.myweatherapp.Model.MySingleton;
 import com.example.randyperrone.myweatherapp.Model.WeatherData;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,18 +16,12 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.json.JSONObject;
-
 import java.text.DecimalFormat;
 
-import static com.example.randyperrone.myweatherapp.Model.Consts.API_KEY_URL;
-import static com.example.randyperrone.myweatherapp.Model.Consts.BASE_URL;
 import static com.example.randyperrone.myweatherapp.Model.Consts.CITY_KEY;
 import static com.example.randyperrone.myweatherapp.Model.Consts.LATITUDE_KEY;
 import static com.example.randyperrone.myweatherapp.Model.Consts.LONGITUDE_KEY;
-import static com.example.randyperrone.myweatherapp.Model.Consts.WEATHER_URL;
 import static com.example.randyperrone.myweatherapp.Model.Consts.ZIPCODE_KEY;
-import static com.example.randyperrone.myweatherapp.Model.Consts.ZIP_URL;
 
 public class DisplayDataActivity extends FragmentActivity implements OnMapReadyCallback {
     private static final String TAG = "DisplayDataActivity";
@@ -50,7 +29,7 @@ public class DisplayDataActivity extends FragmentActivity implements OnMapReadyC
     private String zipCodeString, latitude, longitude, city;
     private WeatherData currentWeatherData;
     private TextView temperatureTV, pressureTV, humidityTV, conditionTV, precipitationTV;
-    GoogleMap myMap;
+    private GoogleMap myMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +49,7 @@ public class DisplayDataActivity extends FragmentActivity implements OnMapReadyC
         longitude = bundle.getString(LONGITUDE_KEY);
         latitude = bundle.getString(LATITUDE_KEY);
         city = bundle.getString(CITY_KEY);
-        DownloadWeatherData downloadWeatherData = new DownloadWeatherData(this);
+        DownloadWeatherData downloadWeatherData = new DownloadWeatherData(getApplicationContext());
 
         //user selected zipcode, use the zipcode
         if(zipCodeString != null){

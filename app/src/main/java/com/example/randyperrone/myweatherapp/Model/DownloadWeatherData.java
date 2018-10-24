@@ -27,7 +27,8 @@ import static com.example.randyperrone.myweatherapp.Model.Consts.*;
 
 public class DownloadWeatherData {
     private static final String TAG = "DownloadWeatherData";
-    WeatherData weatherData;
+    private WeatherData weatherData;
+    private RequestQueue queue;
     private Double latitude;
     private Double longitude;
     private Double temperature;
@@ -39,6 +40,7 @@ public class DownloadWeatherData {
     private final String APIKEY;
 
     public DownloadWeatherData(Context context) {
+        //pass in application context to avoid context memory leaks
         this.context = context;
         APIKEY = context.getString(R.string.open_weather_key);
     }
@@ -73,6 +75,7 @@ public class DownloadWeatherData {
     }
     //Download weather and forecast data. Forecast needed for precipitation
     private void downloadData(String URL_WEATHER, String URL_FORECAST, final VolleyCallBack callBack){
+        queue = Volley.newRequestQueue(context);
         //Download Weather Data (excludes forecast for precipitation)
         final JsonObjectRequest requestWeather = new JsonObjectRequest(Request.Method.GET, URL_WEATHER, null, new Response.Listener<JSONObject>() {
             @Override
@@ -150,8 +153,8 @@ public class DownloadWeatherData {
                 errorDetection(error);
             }
         });
-        MySingleton.getInstance(context).addToRequestque(requestWeather);
-        MySingleton.getInstance(context).addToRequestque(requestForecast);
+        queue.add(requestWeather);
+        queue.add(requestForecast);
     }
 
     private void errorDetection(VolleyError error){
